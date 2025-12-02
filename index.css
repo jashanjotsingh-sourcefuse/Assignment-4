@@ -1,0 +1,56 @@
+/* Make the last column (actions column) sticky using the provided approach */
+table th:last-child,
+table td:last-child {
+  position: sticky;
+  right: 0;
+  z-index: 30; /* Higher than other sticky elements */
+  /* background-color: white; Set background to white */
+}
+
+/* Special handling for action buttons */
+table td:last-child {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+
+table td:last-child .btn {
+  margin: 2px;
+  white-space: nowrap;
+  /* flex: 0 auto; */
+ font-size: 0.85em;
+  padding: 0.5rem 0.5rem;
+  width: auto;
+}
+
+/* Ensure the table container allows scrolling and uses full width */
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  display: block;
+  margin-left: 100px; /* Add margin on the left side */
+  margin-right: 0;
+  padding: 0;
+}
+
+/* Remove any default padding/margin around the table */
+.table-container table {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+/* Use auto table layout to prevent fixing column widths */
+table {
+  table-layout: auto;
+  width: 100%;
+}
+
+/* Remove any padding from table cells if needed */
+table th,
+table td {
+  padding: 0.5rem; /* Keep some minimal padding for content */
+}

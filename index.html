@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="index.css">  
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />  
+
+    <title>sf-assignment typescript</title>
+</head>
+<body>
+    <div class="container text-center">
+<h2 class="text-center mt-5 mb-4 text-primary">User List </h2>
+<button class="btn btn-primary text-center" id="loadUsersBtn">Load Users</button>
+</div>
+
+
+<div class="container mt-5 mb-5 w-100 table-container" style="overflow-x: auto; overflow-y: hidden;">
+    
+    <table class="table table-bordered table-group-divider table-hover table-striped" style="display: none;"   id="userTable">
+        <thead class="table-group-divider table-dark bg-dark">
+            <tr >
+                
+                <th>First Name</th>
+                <th>Middle Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Phone Number</th>
+                
+                <th >Role</th>
+                
+                <th>Address</th>
+                <th>Created At</th>
+                <th>Actions</th>
+               </tr>
+        </thead>
+        
+        <tbody class=" table-md table-striped mx-auto" id="tableBody">
+           
+        </tbody>
+    </table>
+</div>
+    <script src="index.js"></script>
+
+</body>
+</html>
