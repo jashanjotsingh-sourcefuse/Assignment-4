@@ -10,12 +10,13 @@
 
 
      
- 
+   
+    // See also https://aka.ms/tsconfig/module
     "module": "nodenext",
     "target": "es2020",
     "types": [],
     // For nodejs:
-    "lib": ["es2020", "dom"],
+    "lib": ["es2017","esnext", "dom"],
        "useDefineForClassFields": true,
     "experimentalDecorators": false,
 

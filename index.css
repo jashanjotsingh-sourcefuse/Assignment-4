@@ -47,10 +47,12 @@ table td:last-child .btn {
 table {
   table-layout: auto;
   width: 100%;
+ 
 }
 
 /* Remove any padding from table cells if needed */
 table th,
 table td {
   padding: 0.5rem; /* Keep some minimal padding for content */
+ 
 }
