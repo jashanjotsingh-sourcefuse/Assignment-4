@@ -1,4 +1,3 @@
-"use strict";
 var __esDecorate = (this && this.__esDecorate) || function (ctor, descriptorIn, decorators, contextIn, initializers, extraInitializers) {
     function accept(f) { if (f !== void 0 && typeof f !== "function") throw new TypeError("Function expected"); return f; }
     var kind = contextIn.kind, key = kind === "getter" ? "get" : kind === "setter" ? "set" : "value";
@@ -33,7 +32,15 @@ var __runInitializers = (this && this.__runInitializers) || function (thisArg, i
     }
     return useValue ? value : void 0;
 };
-Object.defineProperty(exports, "__esModule", { value: true });
+var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
+    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+        if (ar || !(i in from)) {
+            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+            ar[i] = from[i];
+        }
+    }
+    return to.concat(ar || Array.prototype.slice.call(from));
+};
 // New TC39 compatible decorator
 // New TC39 compatible decorator for Date fields
 function DateFormatter() {
@@ -44,8 +51,8 @@ function DateFormatter() {
         }
         // return initializer function (expected shape when useDefineForClassFields = false)
         return function (value) {
-            const v = value == null ? initialValue : value;
-            const date = v == null ? null : new Date(v);
+            var v = value == null ? initialValue : value;
+            var date = v == null ? null : new Date(v);
             if (!date)
                 return "";
             return new Intl.DateTimeFormat("en-US", {
@@ -64,63 +71,15 @@ var Role;
     Role["Admin"] = "Admin";
     Role["Subscriber"] = "Subscriber";
 })(Role || (Role = {}));
-let User = (() => {
+var User = function () {
     var _a;
-    let _createdAt_decorators;
-    let _createdAt_initializers = [];
-    let _createdAt_extraInitializers = [];
-    return _a = class User {
-            constructor(firstName, middleName, lastName, email, phoneNumber, role, address, createdAt = new Date()) {
-                Object.defineProperty(this, "firstName", {
-                    enumerable: true,
-                    configurable: true,
-                    writable: true,
-                    value: void 0
-                });
-                Object.defineProperty(this, "middleName", {
-                    enumerable: true,
-                    configurable: true,
-                    writable: true,
-                    value: void 0
-                });
-                Object.defineProperty(this, "lastName", {
-                    enumerable: true,
-                    configurable: true,
-                    writable: true,
-                    value: void 0
-                });
-                Object.defineProperty(this, "email", {
-                    enumerable: true,
-                    configurable: true,
-                    writable: true,
-                    value: void 0
-                });
-                Object.defineProperty(this, "phoneNumber", {
-                    enumerable: true,
-                    configurable: true,
-                    writable: true,
-                    value: void 0
-                });
-                Object.defineProperty(this, "role", {
-                    enumerable: true,
-                    configurable: true,
-                    writable: true,
-                    value: void 0
-                });
-                Object.defineProperty(this, "address", {
-                    enumerable: true,
-                    configurable: true,
-                    writable: true,
-                    value: void 0
-                });
-                // use the decorator for date formatting
-                //createdAt: Date;
-                Object.defineProperty(this, "createdAt", {
-                    enumerable: true,
-                    configurable: true,
-                    writable: true,
-                    value: __runInitializers(this, _createdAt_initializers, void 0)
-                });
+    var _createdAt_decorators;
+    var _createdAt_initializers = [];
+    var _createdAt_extraInitializers = [];
+    return _a = /** @class */ (function () {
+            function User(firstName, middleName, lastName, email, phoneNumber, role, address, createdAt) {
+                if (createdAt === void 0) { createdAt = new Date(); }
+                this.createdAt = __runInitializers(this, _createdAt_initializers, void 0);
                 __runInitializers(this, _createdAt_extraInitializers);
                 this.firstName = firstName;
                 this.middleName = middleName;
@@ -131,16 +90,17 @@ let User = (() => {
                 this.address = address;
                 this.createdAt = createdAt;
             }
-        },
-        (() => {
-            const _metadata = typeof Symbol === "function" && Symbol.metadata ? Object.create(null) : void 0;
+            return User;
+        }()),
+        (function () {
+            var _metadata = typeof Symbol === "function" && Symbol.metadata ? Object.create(null) : void 0;
             _createdAt_decorators = [DateFormatter()];
-            __esDecorate(null, null, _createdAt_decorators, { kind: "field", name: "createdAt", static: false, private: false, access: { has: obj => "createdAt" in obj, get: obj => obj.createdAt, set: (obj, value) => { obj.createdAt = value; } }, metadata: _metadata }, _createdAt_initializers, _createdAt_extraInitializers);
+            __esDecorate(null, null, _createdAt_decorators, { kind: "field", name: "createdAt", static: false, private: false, access: { has: function (obj) { return "createdAt" in obj; }, get: function (obj) { return obj.createdAt; }, set: function (obj, value) { obj.createdAt = value; } }, metadata: _metadata }, _createdAt_initializers, _createdAt_extraInitializers);
             if (_metadata) Object.defineProperty(_a, Symbol.metadata, { enumerable: true, configurable: true, writable: true, value: _metadata });
         })(),
         _a;
-})();
-const initialUsersJson = [
+}();
+var initialUsersJson = [
     {
         firstName: "John",
         middleName: "A.",
@@ -172,163 +132,108 @@ const initialUsersJson = [
         createdAt: "2025-01-10T13:20:00"
     }
 ];
-class UserService {
-    constructor() {
-        Object.defineProperty(this, "users", {
-            enumerable: true,
-            configurable: true,
-            writable: true,
-            value: []
-        });
-        Object.defineProperty(this, "originalUsers", {
-            enumerable: true,
-            configurable: true,
-            writable: true,
-            value: []
-        });
-        this.originalUsers = initialUsersJson.map(u => {
+var UserService = /** @class */ (function () {
+    function UserService() {
+        this.users = [];
+        this.originalUsers = [];
+        this.originalUsers = initialUsersJson.map(function (u) {
             return new User(u.firstName, u.middleName || null, u.lastName, u.email, u.phoneNumber, u.role, u.address, u.createdAt);
         });
         this.reset();
     }
-    getAll() {
-        return [...this.users];
-    }
-    reset() {
-        this.users = this.originalUsers.map(u => {
+    UserService.prototype.getAll = function () {
+        return __spreadArray([], this.users, true);
+    };
+    UserService.prototype.reset = function () {
+        this.users = this.originalUsers.map(function (u) {
             return new User(u.firstName, u.middleName, u.lastName, u.email, u.phoneNumber, u.role, u.address, u.createdAt);
         });
-    }
-    add(user) {
+    };
+    UserService.prototype.add = function (user) {
         this.users.push(user);
-    }
-    update(index, user) {
+    };
+    UserService.prototype.update = function (index, user) {
         if (index >= 0 && index < this.users.length) {
             this.users[index] = user;
         }
-    }
-    delete(index) {
+    };
+    UserService.prototype.delete = function (index) {
         if (index >= 0 && index < this.users.length) {
             this.users.splice(index, 1);
         }
-    }
-}
-const userService = new UserService();
-const loadBtn = document.getElementById("loadUsersBtn");
-const tableBody = document.getElementById("tableBody");
+    };
+    return UserService;
+}());
+var userService = new UserService();
+var loadBtn = document.getElementById("loadUsersBtn");
+var tableBody = document.getElementById("tableBody");
 function renderTable() {
-    const users = userService.getAll();
+    var users = userService.getAll();
     tableBody.innerHTML = "";
-    users.forEach((user, index) => {
-        const row = document.createElement("tr");
-        row.innerHTML = `
-      <td>${user.firstName}</td>
-      <td>${user.middleName || ""}</td>
-      <td>${user.lastName}</td>
-      <td>${user.email}</td>
-      <td>${user.phoneNumber}</td>
-      <td>${user.role}</td>
-      <td>${user.address}</td>
-      <td>${(user.createdAt)}</td>
-      <td>
-        <div class="action-buttons">
-          <button class="edit-btn btn btn-primary fa fa-edit" data-index="${index}"></button>
-          <button class="delete-btn btn btn-danger fa fa-trash-alt" data-index="${index}"></button>
-        </div>
-      </td>
-    `;
+    users.forEach(function (user, index) {
+        var row = document.createElement("tr");
+        row.innerHTML = "\n      <td>".concat(user.firstName, "</td>\n      <td>").concat(user.middleName || "", "</td>\n      <td>").concat(user.lastName, "</td>\n      <td>").concat(user.email, "</td>\n      <td>").concat(user.phoneNumber, "</td>\n      <td>").concat(user.role, "</td>\n      <td>").concat(user.address, "</td>\n      <td>").concat((user.createdAt), "</td>\n      <td>\n        <div class=\"action-buttons\">\n          <button class=\"edit-btn btn btn-primary fa fa-edit\" data-index=\"").concat(index, "\"></button>\n          <button class=\"delete-btn btn btn-danger fa fa-trash-alt\" data-index=\"").concat(index, "\"></button>\n        </div>\n      </td>\n    ");
         tableBody.appendChild(row);
     });
     attachRowEvents();
 }
 function attachRowEvents() {
-    const editBtns = document.querySelectorAll(".edit-btn");
-    const deleteBtns = document.querySelectorAll(".delete-btn");
-    editBtns.forEach(btn => {
-        btn.addEventListener("click", () => {
-            const index = Number(btn.getAttribute("data-index"));
+    var editBtns = document.querySelectorAll(".edit-btn");
+    var deleteBtns = document.querySelectorAll(".delete-btn");
+    editBtns.forEach(function (btn) {
+        btn.addEventListener("click", function () {
+            var index = Number(btn.getAttribute("data-index"));
             enterEditMode(index);
         });
     });
-    deleteBtns.forEach(btn => {
-        btn.addEventListener("click", () => {
-            const index = Number(btn.getAttribute("data-index"));
+    deleteBtns.forEach(function (btn) {
+        btn.addEventListener("click", function () {
+            var index = Number(btn.getAttribute("data-index"));
             userService.delete(index);
             renderTable();
         });
     });
 }
 function enterEditMode(index) {
-    const users = userService.getAll();
+    var users = userService.getAll();
     tableBody.innerHTML = "";
-    users.forEach((user, i) => {
-        const row = document.createElement("tr");
+    users.forEach(function (user, i) {
+        var row = document.createElement("tr");
         if (i === index) {
-            row.innerHTML = `
-        <td><input name="firstName" value="${user.firstName}" /></td>
-        <td><input name="middleName" value="${user.middleName || ""}" /></td>
-        <td><input name="lastName" value="${user.lastName}" /></td>
-        <td><input name="email" value="${user.email}" /></td>
-        <td><input name="phoneNumber" value="${user.phoneNumber}" /></td>
-        <td>
-          <select name="role">
-            ${Object.values(Role)
-                .map(r => `<option value="${r}" ${r === user.role ? "selected" : ""}>${r}</option>`)
-                .join("")}
-          </select>
-        </td>
-        <td><input name="address" value="${user.address}" /></td>
-        <td>${(user.createdAt)}</td>
-        <td>
-          <button class="save-btn btn btn-success" data-index="${i}">Save</button>
-          <button class="cancel-btn btn btn-secondary" data-index="${i}">Cancel</button>
-        </td>
-      `;
+            row.innerHTML = "\n        <td><input name=\"firstName\" value=\"".concat(user.firstName, "\" /></td>\n        <td><input name=\"middleName\" value=\"").concat(user.middleName || "", "\" /></td>\n        <td><input name=\"lastName\" value=\"").concat(user.lastName, "\" /></td>\n        <td><input name=\"email\" value=\"").concat(user.email, "\" /></td>\n        <td><input name=\"phoneNumber\" value=\"").concat(user.phoneNumber, "\" /></td>\n        <td>\n          <select name=\"role\">\n            ").concat(Object.values(Role)
+                .map(function (r) { return "<option value=\"".concat(r, "\" ").concat(r === user.role ? "selected" : "", ">").concat(r, "</option>"); })
+                .join(""), "\n          </select>\n        </td>\n        <td><input name=\"address\" value=\"").concat(user.address, "\" /></td>\n        <td>").concat((user.createdAt), "</td>\n        <td>\n          <button class=\"save-btn btn btn-success\" data-index=\"").concat(i, "\">Save</button>\n          <button class=\"cancel-btn btn btn-secondary\" data-index=\"").concat(i, "\">Cancel</button>\n        </td>\n      ");
         }
         else {
-            row.innerHTML = `
-        <td>${user.firstName}</td>
-        <td>${user.middleName || ""}</td>
-        <td>${user.lastName}</td>
-        <td>${user.email}</td>
-        <td>${user.phoneNumber}</td>
-        <td>${user.role}</td>
-        <td>${user.address}</td>
-        <td>${user.createdAt}</td>
-        <td>
-          <button class="edit-btn btn btn-primary fa fa-edit" data-index="${i}"></button>
-          <button class="delete-btn btn btn-danger fa fa-trash-alt" data-index="${i}"></button>
-        </td>
-      `;
+            row.innerHTML = "\n        <td>".concat(user.firstName, "</td>\n        <td>").concat(user.middleName || "", "</td>\n        <td>").concat(user.lastName, "</td>\n        <td>").concat(user.email, "</td>\n        <td>").concat(user.phoneNumber, "</td>\n        <td>").concat(user.role, "</td>\n        <td>").concat(user.address, "</td>\n        <td>").concat(user.createdAt, "</td>\n        <td>\n          <button class=\"edit-btn btn btn-primary fa fa-edit\" data-index=\"").concat(i, "\"></button>\n          <button class=\"delete-btn btn btn-danger fa fa-trash-alt\" data-index=\"").concat(i, "\"></button>\n        </td>\n      ");
         }
         tableBody.appendChild(row);
     });
-    const saveBtn = document.querySelector(".save-btn");
-    const cancelBtn = document.querySelector(".cancel-btn");
-    saveBtn?.addEventListener("click", (event) => {
-        const button = event.currentTarget;
-        const row = button.closest("tr");
+    var saveBtn = document.querySelector(".save-btn");
+    var cancelBtn = document.querySelector(".cancel-btn");
+    saveBtn === null || saveBtn === void 0 ? void 0 : saveBtn.addEventListener("click", function (event) {
+        var button = event.currentTarget;
+        var row = button.closest("tr");
         if (index < 0 || index >= users.length)
             return;
-        const originalUser = users[index];
-        const inputs = row.querySelectorAll("input[name]");
-        const select = row.querySelector("select[name='role']");
-        const updatedData = {};
-        inputs.forEach((input) => {
+        var originalUser = users[index];
+        var inputs = row.querySelectorAll("input[name]");
+        var select = row.querySelector("select[name='role']");
+        var updatedData = {};
+        inputs.forEach(function (input) {
             updatedData[input.name] = input.value || null;
         });
         updatedData.role = select.value;
-        const updatedUser = new User(updatedData.firstName, updatedData.middleName, updatedData.lastName, updatedData.email, updatedData.phoneNumber, updatedData.role, updatedData.address, originalUser.createdAt);
+        var updatedUser = new User(updatedData.firstName, updatedData.middleName, updatedData.lastName, updatedData.email, updatedData.phoneNumber, updatedData.role, updatedData.address, originalUser.createdAt);
         userService.update(index, updatedUser);
         renderTable();
     });
-    cancelBtn?.addEventListener("click", renderTable);
+    cancelBtn === null || cancelBtn === void 0 ? void 0 : cancelBtn.addEventListener("click", renderTable);
     attachRowEvents();
 }
-loadBtn.addEventListener("click", () => {
+loadBtn.addEventListener("click", function () {
     userService.reset();
     renderTable();
     loadBtn.textContent = "Refresh data";
     document.getElementById("userTable").style.display = "table";
 });
-//# sourceMappingURL=index.js.map
