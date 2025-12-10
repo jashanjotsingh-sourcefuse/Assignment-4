@@ -68,16 +68,6 @@ class User {
 }
 
 
-// interface IUserService {
-//   getAll(): User[];
-//   reset(): void;
-//   add(user: User): void;
-//   update(index: number, user: User): void;
-//   delete(index: number): void;
-// }
-
-
-// creating the generic interface
 
 interface IGenericService<T>{
   getAll():T[];
@@ -151,71 +141,6 @@ class GenericService<T> implements IGenericService<T>{
       }
   }
 }
-
-
-
-
-// class UserService implements IUserService {
-//   private users: User[] = [];
-//   private originalUsers: User[] = [];
-
-//   constructor() {
-//     this.originalUsers = initialUsersJson.map(u => {
-//       return new User(
-//         u.firstName,
-//         u.middleName || null,
-//         u.lastName,
-//         u.email,
-//         u.phoneNumber,
-//         u.role,
-//         u.address,
-//         u.createdAt
-//       );
-//     });
-
-//     this.reset();
-//   }
-
-//   getAll(): User[] {
-//     return [...this.users];
-//   }
-
-//   reset(): void {
-//     this.users = this.originalUsers.map(u => {
-//       return new User(
-//         u.firstName,
-//         u.middleName,
-//         u.lastName,
-//         u.email,
-//         u.phoneNumber,
-//         u.role,
-//         u.address,
-//         u.createdAt
-//       );
-//     });
-//   }
-
-//   add(user: User): void {
-//     this.users.push(user);
-//   }
-
-//   update(index: number, user: User): void {
-//     if (index >= 0 && index < this.users.length) {
-//       this.users[index] = user;
-//     }
-//   }
-
-//   delete(index: number): void {
-//     if (index >= 0 && index < this.users.length) {
-//       this.users.splice(index, 1);
-//     }
-//   }
-// }
-
-
-//const userService = new UserService();
-//using generic service
-
 //generic service instance
 const userService = new GenericService<User>(initialUsersJson.map(u => {
   return new User(
