@@ -132,39 +132,90 @@ var initialUsersJson = [
         createdAt: "2025-01-10T13:20:00"
     }
 ];
-var UserService = /** @class */ (function () {
-    function UserService() {
-        this.users = [];
-        this.originalUsers = [];
-        this.originalUsers = initialUsersJson.map(function (u) {
-            return new User(u.firstName, u.middleName || null, u.lastName, u.email, u.phoneNumber, u.role, u.address, u.createdAt);
-        });
+//generic class implementation
+var GenericService = /** @class */ (function () {
+    function GenericService(initialItems) {
+        this.items = [];
+        this.originalItems = [];
+        this.originalItems = __spreadArray([], initialItems, true);
         this.reset();
     }
-    UserService.prototype.getAll = function () {
-        return __spreadArray([], this.users, true);
+    GenericService.prototype.getAll = function () {
+        return __spreadArray([], this.items, true);
     };
-    UserService.prototype.reset = function () {
-        this.users = this.originalUsers.map(function (u) {
-            return new User(u.firstName, u.middleName, u.lastName, u.email, u.phoneNumber, u.role, u.address, u.createdAt);
-        });
+    GenericService.prototype.reset = function () {
+        this.items = __spreadArray([], this.originalItems, true);
     };
-    UserService.prototype.add = function (user) {
-        this.users.push(user);
+    GenericService.prototype.add = function (item) {
+        this.items.push(item);
     };
-    UserService.prototype.update = function (index, user) {
-        if (index >= 0 && index < this.users.length) {
-            this.users[index] = user;
+    GenericService.prototype.update = function (index, item) {
+        if (index >= 0 && index < this.items.length) {
+            this.items[index] = item;
         }
     };
-    UserService.prototype.delete = function (index) {
-        if (index >= 0 && index < this.users.length) {
-            this.users.splice(index, 1);
+    GenericService.prototype.delete = function (index) {
+        if (index >= 0 && index < this.items.length) {
+            this.items.splice(index, 1);
         }
     };
-    return UserService;
+    return GenericService;
 }());
-var userService = new UserService();
+// class UserService implements IUserService {
+//   private users: User[] = [];
+//   private originalUsers: User[] = [];
+//   constructor() {
+//     this.originalUsers = initialUsersJson.map(u => {
+//       return new User(
+//         u.firstName,
+//         u.middleName || null,
+//         u.lastName,
+//         u.email,
+//         u.phoneNumber,
+//         u.role,
+//         u.address,
+//         u.createdAt
+//       );
+//     });
+//     this.reset();
+//   }
+//   getAll(): User[] {
+//     return [...this.users];
+//   }
+//   reset(): void {
+//     this.users = this.originalUsers.map(u => {
+//       return new User(
+//         u.firstName,
+//         u.middleName,
+//         u.lastName,
+//         u.email,
+//         u.phoneNumber,
+//         u.role,
+//         u.address,
+//         u.createdAt
+//       );
+//     });
+//   }
+//   add(user: User): void {
+//     this.users.push(user);
+//   }
+//   update(index: number, user: User): void {
+//     if (index >= 0 && index < this.users.length) {
+//       this.users[index] = user;
+//     }
+//   }
+//   delete(index: number): void {
+//     if (index >= 0 && index < this.users.length) {
+//       this.users.splice(index, 1);
+//     }
+//   }
+// }
+//const userService = new UserService();
+//using generic service
+//generic service instance
+var userService = new GenericService(initialUsersJson.map(function (u) {
+    return new User(u.firstName, u.middleName || null, u.lastName, u.email, u.phoneNumber, u.role, u.address, u.createdAt);
+}));
 var loadBtn = document.getElementById("loadUsersBtn");
 var tableBody = document.getElementById("tableBody");
 function renderTable() {
