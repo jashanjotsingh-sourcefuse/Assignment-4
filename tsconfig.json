@@ -14,7 +14,7 @@
     // See also https://aka.ms/tsconfig/module
     "module": "nodenext",
     "target": "es2020",
-    "types": [],
+    "types": ["node"],
     // For nodejs:
     "lib": ["es2017","esnext", "dom"],
        "useDefineForClassFields": true,
