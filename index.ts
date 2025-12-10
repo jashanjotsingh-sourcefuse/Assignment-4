@@ -68,13 +68,25 @@ class User {
 }
 
 
-interface IUserService {
-  getAll(): User[];
-  reset(): void;
-  add(user: User): void;
-  update(index: number, user: User): void;
-  delete(index: number): void;
+// interface IUserService {
+//   getAll(): User[];
+//   reset(): void;
+//   add(user: User): void;
+//   update(index: number, user: User): void;
+//   delete(index: number): void;
+// }
+
+
+// creating the generic interface
+
+interface IGenericService<T>{
+  getAll():T[];
+  reset():void;
+  add(item:T):void;
+  update(index:number,item:T):void;
+  delete(index:number):void;
 }
+
 
 
 const initialUsersJson = [
@@ -111,65 +123,116 @@ const initialUsersJson = [
 ];
 
 
-class UserService implements IUserService {
-  private users: User[] = [];
-  private originalUsers: User[] = [];
-
-  constructor() {
-    this.originalUsers = initialUsersJson.map(u => {
-      return new User(
-        u.firstName,
-        u.middleName || null,
-        u.lastName,
-        u.email,
-        u.phoneNumber,
-        u.role,
-        u.address,
-        u.createdAt
-      );
-    });
-
+//generic class implementation
+class GenericService<T> implements IGenericService<T>{
+  private items:T[]=[];
+  private originalItems:T[]=[];
+  constructor(initialItems:T[]){
+    this.originalItems=[...initialItems];
     this.reset();
   }
-
-  getAll(): User[] {
-    return [...this.users];
+  getAll():T[]{
+    return[...this.items];
   }
-
   reset(): void {
-    this.users = this.originalUsers.map(u => {
-      return new User(
-        u.firstName,
-        u.middleName,
-        u.lastName,
-        u.email,
-        u.phoneNumber,
-        u.role,
-        u.address,
-        u.createdAt
-      );
-    });
+      this.items=[...this.originalItems];
   }
-
-  add(user: User): void {
-    this.users.push(user);
+  add(item: T): void {
+      this.items.push(item);
   }
-
-  update(index: number, user: User): void {
-    if (index >= 0 && index < this.users.length) {
-      this.users[index] = user;
-    }
+  update(index: number, item: T): void {
+      if (index >= 0 && index < this.items.length) {
+          this.items[index] = item;
+      }
   }
-
   delete(index: number): void {
-    if (index >= 0 && index < this.users.length) {
-      this.users.splice(index, 1);
-    }
+      if (index >= 0 && index < this.items.length) {
+          this.items.splice(index, 1);
+      }
   }
 }
 
 
-const userService = new UserService();
+
+
+// class UserService implements IUserService {
+//   private users: User[] = [];
+//   private originalUsers: User[] = [];
+
+//   constructor() {
+//     this.originalUsers = initialUsersJson.map(u => {
+//       return new User(
+//         u.firstName,
+//         u.middleName || null,
+//         u.lastName,
+//         u.email,
+//         u.phoneNumber,
+//         u.role,
+//         u.address,
+//         u.createdAt
+//       );
+//     });
+
+//     this.reset();
+//   }
+
+//   getAll(): User[] {
+//     return [...this.users];
+//   }
+
+//   reset(): void {
+//     this.users = this.originalUsers.map(u => {
+//       return new User(
+//         u.firstName,
+//         u.middleName,
+//         u.lastName,
+//         u.email,
+//         u.phoneNumber,
+//         u.role,
+//         u.address,
+//         u.createdAt
+//       );
+//     });
+//   }
+
+//   add(user: User): void {
+//     this.users.push(user);
+//   }
+
+//   update(index: number, user: User): void {
+//     if (index >= 0 && index < this.users.length) {
+//       this.users[index] = user;
+//     }
+//   }
+
+//   delete(index: number): void {
+//     if (index >= 0 && index < this.users.length) {
+//       this.users.splice(index, 1);
+//     }
+//   }
+// }
+
+
+//const userService = new UserService();
+//using generic service
+
+//generic service instance
+const userService = new GenericService<User>(initialUsersJson.map(u => {
+  return new User(
+    u.firstName,
+    u.middleName || null,
+    u.lastName,
+    u.email,
+    u.phoneNumber,
+    u.role,
+    u.address,
+    u.createdAt
+  );
+}));
+
+
+
+
 const loadBtn = document.getElementById("loadUsersBtn") as HTMLButtonElement;
 const tableBody = document.getElementById("tableBody") as HTMLElement;
 
